@@ -132,6 +132,18 @@ public class CustomUtility {
 				cell = row.createCell(2);
 				cell.setCellType(CellType.STRING);
 				cell.setCellValue("Operation Date");
+				cell = row.createCell(3);
+				cell.setCellType(CellType.STRING);
+				cell.setCellValue("PROCESS_GROUP_ID");
+				cell = row.createCell(4);
+				cell.setCellType(CellType.STRING);
+				cell.setCellValue("LOT_NUM");
+				cell = row.createCell(5);
+				cell.setCellType(CellType.STRING);
+				cell.setCellValue("MEMO_SQL");
+				cell = row.createCell(6);
+				cell.setCellType(CellType.STRING);
+				cell.setCellValue("Path");
 				
 				//iterate
 				int itemCount = 1;
@@ -152,6 +164,27 @@ public class CustomUtility {
 							cell = row.createCell(2);
 							cell.setCellType(CellType.STRING);
 							cell.setCellValue(CustomUtility.sanitize(item.getArgumentMap().get(Constants.KEY_OP_DATE)));
+						}
+						
+						if ( item.getArgumentMap().containsKey("PROCESS_GROUP_ID") ) {
+							cell = row.createCell(3);
+							cell.setCellType(CellType.STRING);
+							cell.setCellValue(CustomUtility.sanitize(item.getArgumentMap().get("PROCESS_GROUP_ID")));
+						}
+						if ( item.getArgumentMap().containsKey("LOT_NUM") ) {
+							cell = row.createCell(4);
+							cell.setCellType(CellType.STRING);
+							cell.setCellValue(CustomUtility.sanitize(item.getArgumentMap().get("LOT_NUM")));
+						}
+						if ( null!=item.getParamStr() ) {
+							cell = row.createCell(5);
+							cell.setCellType(CellType.STRING);
+							cell.setCellValue(CustomUtility.sanitize(item.getParamStr()));
+						}
+						if ( null!=item.getPath() ) {
+							cell = row.createCell(6);
+							cell.setCellType(CellType.STRING);
+							cell.setCellValue(CustomUtility.sanitize(item.getPath()));
 						}
 						
 						

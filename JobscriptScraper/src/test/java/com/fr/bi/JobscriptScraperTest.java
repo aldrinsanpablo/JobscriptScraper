@@ -12,9 +12,9 @@ import org.junit.Test;
 
 public class JobscriptScraperTest {
 
-	private final String testItemPath = "C:\\Users\\al-drin.g.san.pablo\\Documents\\03 Workspace\\STS\\JobscriptScraper\\src\\main\\resources\\process\\BIDBMT50102_AuthMng\\BL\\BIDBMT50102BL01_UserAcntMCrt_0.1.item";
-	private final String testItemPath2 = "C:\\Users\\al-drin.g.san.pablo\\Documents\\03 Workspace\\STS\\JobscriptScraper\\src\\main\\resources\\process\\BIDBMT50104_ItmMMng\\BL\\BIDBMT50104BL06_ItmCtgryMCrt_0.1.item";
-	private final String testProcessPath = "C:\\Users\\al-drin.g.san.pablo\\Documents\\03 Workspace\\STS\\JobscriptScraper\\src\\main\\resources\\process";
+	private final String testItemPath = "C:\\Users\\al-drin.g.san.pablo\\git\\JobscriptScraper\\JobscriptScraper\\src\\main\\resources\\process\\BIDBMT50102_AuthMng\\BL\\BIDBMT50102BL01_UserAcntMCrt_0.1.item";
+	private final String testItemPath2 = "C:\\Users\\al-drin.g.san.pablo\\git\\JobscriptScraper\\JobscriptScraper\\src\\main\\resources\\process\\BIDBMT50104_ItmMMng\\BL\\BIDBMT50104BL06_ItmCtgryMCrt_0.1.item";
+	private final String testProcessPath = "C:\\Users\\al-drin.g.san.pablo\\git\\JobscriptScraper\\JobscriptScraper\\src\\main\\resources\\process";
 	private final String testExcelPath = "C:\\Users\\al-drin.g.san.pablo\\Desktop\\dumpexcel.xlsx";
 	
 	@Test
