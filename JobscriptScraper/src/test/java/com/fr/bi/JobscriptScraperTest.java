@@ -19,7 +19,8 @@ public class JobscriptScraperTest {
 	
 	@Test
 	public void testListAllParams() {
-		System.out.println( CustomUtility.listAllParams(testItemPath2) );
+		System.out.println( CustomUtility.listAllParams(testItemPath) );
+//		System.out.println( CustomUtility.listAllParams(testItemPath2) );
 	}
 
 	@Test

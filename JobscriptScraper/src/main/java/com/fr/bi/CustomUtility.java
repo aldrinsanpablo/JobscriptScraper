@@ -28,6 +28,8 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 public class CustomUtility {
@@ -74,9 +76,9 @@ public class CustomUtility {
 	 * 
 	 * @param absolutePath
 	 */
-	public static String listAllParams(String absolutePath) {
+	public static List<String> listAllParams(String absolutePath) {
 
-		String returnStr = null;
+		List<String> returnList = new ArrayList<String>();
 		File fXmlFile = new File(absolutePath);
 
 		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -91,8 +93,16 @@ public class CustomUtility {
 			XPathFactory xPathfactory = XPathFactory.newInstance();
 			XPath xpath = xPathfactory.newXPath();
 			XPathExpression expr = xpath
-					.compile("*[name()='talendfile:ProcessType']//node//elementParameter[@field='MEMO_SQL']//@value");
-			returnStr = expr.evaluate(doc, XPathConstants.STRING).toString();
+					.compile("*[name()='talendfile:ProcessType']//*//elementParameter[@field='MEMO_SQL']//@value");
+//			returnStr = expr.evaluate(doc, XPathConstants.STRING).toString();
+			
+			NodeList nodelist = (NodeList) expr.evaluate(doc, XPathConstants.NODESET);
+System.out.println( "nodes:" + nodelist.getLength());
+			
+			for(int x=0; x<nodelist.getLength(); x++) {
+				returnList.add(nodelist.item(x).getNodeValue());
+System.out.println(nodelist.item(x));
+			}
 
 		} catch (ParserConfigurationException e) {
 			e.printStackTrace();
@@ -104,7 +114,7 @@ public class CustomUtility {
 			e.printStackTrace();
 		}
 
-		return returnStr;
+		return returnList;
 	}
 
 	public static void writeToFile(List<Item> itemList, String excelPath) throws IOException {
@@ -138,10 +148,18 @@ public class CustomUtility {
 				cell = row.createCell(4);
 				cell.setCellType(CellType.STRING);
 				cell.setCellValue("LOT_NUM");
+				//ADD
 				cell = row.createCell(5);
 				cell.setCellType(CellType.STRING);
-				cell.setCellValue("MEMO_SQL");
+				cell.setCellValue("TABLE_NAME");
 				cell = row.createCell(6);
+				cell.setCellType(CellType.STRING);
+				cell.setCellValue("LOT_NUM_COL_NAME");
+				
+				cell = row.createCell(7);
+				cell.setCellType(CellType.STRING);
+				cell.setCellValue("MEMO_SQL");
+				cell = row.createCell(8);
 				cell.setCellType(CellType.STRING);
 				cell.setCellValue("Path");
 				
@@ -176,13 +194,24 @@ public class CustomUtility {
 							cell.setCellType(CellType.STRING);
 							cell.setCellValue(CustomUtility.sanitize(item.getArgumentMap().get("LOT_NUM")));
 						}
-						if ( null!=item.getParamStr() ) {
+						if ( item.getArgumentMap().containsKey("TABLE_NAME") ) {
 							cell = row.createCell(5);
+							cell.setCellType(CellType.STRING);
+							cell.setCellValue(CustomUtility.sanitize(item.getArgumentMap().get("TABLE_NAME")));
+						}
+						if ( item.getArgumentMap().containsKey("LOT_NUM_COL_NAME") ) {
+							cell = row.createCell(6);
+							cell.setCellType(CellType.STRING);
+							cell.setCellValue(CustomUtility.sanitize(item.getArgumentMap().get("LOT_NUM_COL_NAME")));
+						}
+						
+						if ( null!=item.getParamStr() ) {
+							cell = row.createCell(7);
 							cell.setCellType(CellType.STRING);
 							cell.setCellValue(CustomUtility.sanitize(item.getParamStr()));
 						}
 						if ( null!=item.getPath() ) {
-							cell = row.createCell(6);
+							cell = row.createCell(8);
 							cell.setCellType(CellType.STRING);
 							cell.setCellValue(CustomUtility.sanitize(item.getPath()));
 						}

@@ -19,11 +19,12 @@ public class JobscriptScraper {
 				itemList = new ArrayList<Item>();
 				for (File i : fileList) {
 					// getParams
-					Item nItem = new Item(i.getAbsolutePath(), CustomUtility.listAllParams(i.getAbsolutePath()));
-					nItem.setArgumentMap(CustomUtility.extractArguments(nItem.getParamStr()));
-					itemList.add(nItem);
-					
-					System.out.println(nItem);
+					for ( String str : CustomUtility.listAllParams(i.getAbsolutePath())) {
+						Item nItem = new Item(i.getAbsolutePath(), str);
+						nItem.setArgumentMap(CustomUtility.extractArguments(str));
+						itemList.add(nItem);
+					}
+//					System.out.println(nItem);
 				}
 
 				if (!itemList.isEmpty()) {
