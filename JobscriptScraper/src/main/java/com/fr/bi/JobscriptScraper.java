@@ -8,7 +8,7 @@ import java.util.Map;
 public class JobscriptScraper {
 
 	public static void run(String sourcePath, String excelPath) {
-
+System.out.println("###START###");
 		List<Item> itemList = null;
 		List<File> fileList = null;
 
@@ -21,11 +21,11 @@ public class JobscriptScraper {
 				for (File i : fileList) {
 					// getParams
 					for ( String str : CustomUtility.listAllParams(i.getAbsolutePath())) {
-						Map<String,String> iMap = CustomUtility.extractArguments(str);
+						Map<String,String> iMap = CustomUtility.extractArguments(str, i.getName());
 						Item nItem = new Item(i.getAbsolutePath(), str);
 						nItem.setSfcId(iMap.get(Constants.KEY_SFC_ID));
-						nItem.setProcessId(iMap.get(Constants.KEY_PROC_ID));
 						iMap.remove(Constants.KEY_SFC_ID);
+						nItem.setProcessId(iMap.get(Constants.KEY_PROC_ID));
 						iMap.remove(Constants.KEY_PROC_ID);
 						nItem.setArgumentMap(iMap);
 						itemList.add(nItem);
@@ -43,7 +43,7 @@ public class JobscriptScraper {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
+System.out.println("###END###");
 	}
 
 }
