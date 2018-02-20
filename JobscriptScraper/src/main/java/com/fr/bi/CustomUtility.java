@@ -28,7 +28,6 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.w3c.dom.Document;
-import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
@@ -94,14 +93,14 @@ public class CustomUtility {
 			XPath xpath = xPathfactory.newXPath();
 			XPathExpression expr = xpath
 					.compile("*[name()='talendfile:ProcessType']//*//elementParameter[@field='MEMO_SQL']//@value");
-//			returnStr = expr.evaluate(doc, XPathConstants.STRING).toString();
-			
+			// returnStr = expr.evaluate(doc, XPathConstants.STRING).toString();
+
 			NodeList nodelist = (NodeList) expr.evaluate(doc, XPathConstants.NODESET);
-System.out.println( "nodes:" + nodelist.getLength());
-			
-			for(int x=0; x<nodelist.getLength(); x++) {
+			System.out.println("nodes:" + nodelist.getLength());
+
+			for (int x = 0; x < nodelist.getLength(); x++) {
 				returnList.add(nodelist.item(x).getNodeValue());
-System.out.println(nodelist.item(x));
+				System.out.println(nodelist.item(x));
 			}
 
 		} catch (ParserConfigurationException e) {
@@ -132,29 +131,23 @@ System.out.println(nodelist.item(x));
 				Sheet sheet = workbook.createSheet("Jobscript");
 				
 				//header row
+				//sfcId, componentId, Key, Value
 				row = sheet.createRow(0);
 				cell = row.createCell(0);
 				cell.setCellType(CellType.STRING);
 				cell.setCellValue("SFC ID");
 				cell = row.createCell(1);
 				cell.setCellType(CellType.STRING);
-				cell.setCellValue("Process ID");
+				cell.setCellValue("Component ID");
 				cell = row.createCell(2);
 				cell.setCellType(CellType.STRING);
-				cell.setCellValue("Operation Date");
+				cell.setCellValue("Key");
 				cell = row.createCell(3);
 				cell.setCellType(CellType.STRING);
-				cell.setCellValue("PROCESS_GROUP_ID");
+				cell.setCellValue("Value");
 				cell = row.createCell(4);
 				cell.setCellType(CellType.STRING);
-				cell.setCellValue("LOT_NUM");
-				//ADD
-				cell = row.createCell(5);
-				cell.setCellType(CellType.STRING);
-				cell.setCellValue("TABLE_NAME");
-				cell = row.createCell(6);
-				cell.setCellType(CellType.STRING);
-				cell.setCellValue("LOT_NUM_COL_NAME");
+				cell.setCellValue("MEMO_SQL");
 				
 				cell = row.createCell(7);
 				cell.setCellType(CellType.STRING);
@@ -167,6 +160,13 @@ System.out.println(nodelist.item(x));
 				int itemCount = 1;
 				for (Item item : itemList ) {
 					if ( null!=item.getArgumentMap() && !item.getArgumentMap().isEmpty() ) {
+						
+//						for (Map.Entry<String, String> entry : getArgumentMap.entrySet())
+//						{
+//						    System.out.println(entry.getKey() + "/" + entry.getValue());
+//						    //
+//						}
+						
 						row = sheet.createRow(itemCount);
 						if ( item.getArgumentMap().containsKey(Constants.KEY_SFC_ID) ) {
 							cell = row.createCell(0);
@@ -205,10 +205,10 @@ System.out.println(nodelist.item(x));
 							cell.setCellValue(CustomUtility.sanitize(item.getArgumentMap().get("LOT_NUM_COL_NAME")));
 						}
 						
-						if ( null!=item.getParamStr() ) {
+						if ( null!=item.getMemoSql() ) {
 							cell = row.createCell(7);
 							cell.setCellType(CellType.STRING);
-							cell.setCellValue(CustomUtility.sanitize(item.getParamStr()));
+							cell.setCellValue(CustomUtility.sanitize(item.getMemoSql()));
 						}
 						if ( null!=item.getPath() ) {
 							cell = row.createCell(8);
@@ -269,7 +269,7 @@ System.out.println(nodelist.item(x));
 			} catch (Exception e) {
 				// handle NPE, index out of bounds
 			}
-//			System.out.println(returnMap);
+			// System.out.println(returnMap);
 		} else {
 			System.out.println("!!!ParamStr does not match regular expression!");
 		}
