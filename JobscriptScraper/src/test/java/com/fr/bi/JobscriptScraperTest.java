@@ -1,7 +1,7 @@
 package com.fr.bi;
 
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+//import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.io.IOException;
@@ -13,9 +13,9 @@ import org.junit.Test;
 public class JobscriptScraperTest {
 
 	private final String testItemPath = "C:\\Users\\al-drin.g.san.pablo\\git\\JobscriptScraper\\JobscriptScraper\\src\\main\\resources\\process\\BIDBMT50102_AuthMng\\BL\\BIDBMT50102BL01_UserAcntMCrt_0.1.item";
-	private final String testItemPath2 = "C:\\Users\\al-drin.g.san.pablo\\git\\JobscriptScraper\\JobscriptScraper\\src\\main\\resources\\process\\BIDBMT50104_ItmMMng\\BL\\BIDBMT50104BL06_ItmCtgryMCrt_0.1.item";
-	private final String testProcessPath = "C:\\Users\\jonelisa.l.miguel\\Desktop\\process";
-	private final String testExcelPath = "C:\\Users\\jonelisa.l.miguel\\Desktop\\dumpexcel.xlsx";
+//	private final String testItemPath2 = "C:\\Users\\al-drin.g.san.pablo\\git\\JobscriptScraper\\JobscriptScraper\\src\\main\\resources\\process\\BIDBMT50104_ItmMMng\\BL\\BIDBMT50104BL06_ItmCtgryMCrt_0.1.item";
+	private final String testProcessPath = "C:\\Users\\jonelisa.l.miguel\\Documents\\Development\\GitRepository\\fr-bid-talend-job\\ARIAKE_BLUE_INTEG_TALEND_BI\\process";
+	private final String testExcelPath = "C:\\Users\\jonelisa.l.miguel\\Desktop\\ExtractedParametersFromJobscript.xlsx";
 	
 	@Test
 	@Ignore
@@ -62,5 +62,12 @@ public class JobscriptScraperTest {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	@Test
+	
+	public void testparse() {
+	    System.out.println(CustomUtility.parse("(String)globalMap.get(LOT_NUM)"));
+//	    CustomUtility.parse("(String)globalMap.get(LOT_NUM)");
+	    
 	}
 }

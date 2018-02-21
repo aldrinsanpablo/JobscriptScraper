@@ -150,13 +150,14 @@ public class CustomUtility {
 		cell = row.createCell(5);
 		cell.setCellType(CellType.STRING);
 		cell.setCellValue("MEMO_SQL");
-		cell = row.createCell(6);
-		cell.setCellType(CellType.STRING);
-		cell.setCellValue("Path");
+		// cell = row.createCell(6);
+		// cell.setCellType(CellType.STRING);
+		// cell.setCellValue("Path");
 		/* Row 0 - Header END */
 
 		// Iterate from Row 1 onwards
 		int rowCount = 1;
+
 		for (Item item : itemList) {
 		    if (null != item.getArgumentMap() && !item.getArgumentMap().isEmpty()) {
 
@@ -238,9 +239,9 @@ public class CustomUtility {
 		    returnMap = new HashMap<String, String>();
 		    returnMap.put(Constants.KEY_PROC_ID, sanitize(args[0]));
 		    returnMap.put(Constants.KEY_SFC_ID, sanitize(getSfcId(path)));
-		    returnMap.put(Constants.KEY_OP_DATE, sanitize(args[1]));
+		    returnMap.put(Constants.KEY_OP_DATE, parse(args[1]));
 		    for (int x = 2; x < args.length;) {
-			returnMap.put(sanitize(args[x]), sanitize(args[x + 1]));
+			returnMap.put(sanitize(args[x]), parse(args[x + 1]));
 			x += 2;
 		    }
 		}
@@ -268,6 +269,30 @@ public class CustomUtility {
 	    returnStr = str.trim();
 	}
 	return returnStr;
+    }
+
+    public static String parse(String str) {
+	String returnstr = "";
+
+	if (null != str && "" != str) {
+	    returnstr = sanitize(str);
+	    
+	    if (returnstr.contains("LOT_NUM")) {
+		returnstr = "(LOT_NUM)";
+	    }
+
+	     if (returnstr.contains("(") && returnstr.contains(")")) {
+		 
+	    returnstr = returnstr.substring(returnstr.indexOf("(") + 1, returnstr.length() - 1);
+
+	     }
+
+	    if (returnstr.contains("context.")) {
+		returnstr = returnstr.replaceAll("context.", "");
+	    }
+	}
+
+	return returnstr;
     }
 
     @Deprecated
