@@ -35,7 +35,7 @@ public class JobscriptScraper {
 
 	try {
 
-	    fileList = CustomUtility.getAllPaths(sourcePath);
+	    fileList = CustomUtility.getAllPaths2(sourcePath);
 	    System.out.println("fileList size: " + fileList.size());
 
 	    if (null != fileList && fileList.size() > 0) {
