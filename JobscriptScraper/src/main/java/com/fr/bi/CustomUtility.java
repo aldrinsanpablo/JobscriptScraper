@@ -275,14 +275,14 @@ public class CustomUtility {
 	String returnstr = "";
 
 	if (null != str && "" != str) {
-	    returnstr = sanitize(str);
+	    returnstr = CustomUtility.sanitize(str);
 	    
 	    if (returnstr.contains("LOT_NUM")) {
 		returnstr = "(LOT_NUM)";
 	    }
 
 	     if (returnstr.contains("(") && returnstr.contains(")")) {
-		 
+
 	    returnstr = returnstr.substring(returnstr.indexOf("(") + 1, returnstr.length() - 1);
 
 	     }

@@ -60,6 +60,7 @@ public class JobscriptScraper {
 		    CustomUtility.writeToFile(itemList, excelPath);
 		}
 
+		 
 	    }
 
 	} catch (Exception e) {
