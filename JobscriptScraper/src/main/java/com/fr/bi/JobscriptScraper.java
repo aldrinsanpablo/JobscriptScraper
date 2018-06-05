@@ -55,7 +55,7 @@ public class JobscriptScraper {
 			itemList.add(nItem);
 			// System.out.println(nItem);
 		    	} else {
-		    		System.out.println("Not LoadSQLFile in Memo SQL");
+		    		System.out.println("!!!!!No LoadSQLFile found in Memo SQL!!!!!");
 		    	}//else null = iMap
 			
 			}
