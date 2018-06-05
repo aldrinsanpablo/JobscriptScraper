@@ -28,6 +28,7 @@ public class JobscriptScraperTest {
 
 	@Test
 //	@Ignore
+	@Deprecated
 	public void testGetAllPaths() {
 		List<File> list = CustomUtility.getAllPaths(testProcessPath);
 		assertNotNull(list);
@@ -78,7 +79,7 @@ public class JobscriptScraperTest {
 		}
 	}
 	@Test
-	
+	@Ignore
 	public void testparse() {
 	    System.out.println(CustomUtility.parse("(String)globalMap.get(LOT_NUM)"));
 //	    CustomUtility.parse("(String)globalMap.get(LOT_NUM)");
