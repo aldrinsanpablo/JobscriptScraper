@@ -44,6 +44,8 @@ public class JobscriptScraper {
 		    // getParams
 		    for (String str : CustomUtility.listAllParams(i.getAbsolutePath())) {
 			Map<String, String> iMap = CustomUtility.extractArguments(str, i.getName());
+			
+			if (null != iMap) {
 			Item nItem = new Item(i.getAbsolutePath(), str);
 			nItem.setSfcId(iMap.get(Constants.KEY_SFC_ID));
 			iMap.remove(Constants.KEY_SFC_ID);
@@ -52,7 +54,11 @@ public class JobscriptScraper {
 			nItem.setArgumentMap(iMap);
 			itemList.add(nItem);
 			// System.out.println(nItem);
-		    }
+		    	} else {
+		    		System.out.println("Not LoadSQLFile in Memo SQL");
+		    	}//else null = iMap
+			
+			}
 		}
 
 		if (!itemList.isEmpty()) {

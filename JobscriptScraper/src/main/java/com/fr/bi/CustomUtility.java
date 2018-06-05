@@ -82,7 +82,8 @@ public class CustomUtility {
 		
 		return returnList;
 	}
-
+	
+	@Deprecated
 	public static List<File> getAllPaths(String directoryPath) {
 		List<File> returnList = new ArrayList<File>();
 		DirectoryFilter myDirFilter = new DirectoryFilter();
@@ -288,7 +289,8 @@ public class CustomUtility {
 					returnMap.put(Constants.KEY_PROC_ID, sanitize(args[0]));
 					returnMap.put(Constants.KEY_SFC_ID, sanitize(getSfcId(path)));
 					returnMap.put(Constants.KEY_OP_DATE, parse(args[1]));
-					for (int x = 2; x < args.length;) {
+					returnMap.put(Constants.KEY_SQL_FILEPATH, parse(args[2]));
+					for (int x = 3; x < args.length;) {
 						returnMap.put(sanitize(args[x]), parse(args[x + 1]));
 						x += 2;
 					}
@@ -305,9 +307,13 @@ public class CustomUtility {
 
 	public static String getSfcId(String str) {
 		String returnStr = "";
-		if (null != str) {
+		
+		if (null != str && str.contains("BIDBMT") == true) {
 			returnStr = str.substring(0, str.indexOf("_"));
+		} else {
+			returnStr = str.substring(0, str.indexOf("_0.1"));
 		}
+		
 		return returnStr;
 	}
 
