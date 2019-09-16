@@ -1,9 +1,11 @@
 package com.fr.bi;
 
 import java.util.Map;
-
+/**
+ * This is class level comment.
+ */
 public class Item {
-
+	//This is a test
 	private String path;
 
 	private String memoSql;
